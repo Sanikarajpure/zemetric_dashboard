@@ -76,6 +76,14 @@ const SmsSender = () => {
       );
       setViolations(violationsRes?.data?.violations || null);
     } catch (err) {
+      // Refetch stats and violations in send sms errors
+      const statsRes = await getSmsStats(phoneNumber);
+      const violationsRes = await getSmsViolations(phoneNumber);
+      setSmsStats(
+        statsRes?.data || { requestsLastMinute: 0, requestsLastDay: 0 }
+      );
+      setViolations(violationsRes?.data?.violations || null);
+
       setResponse({
         status: "Error",
         data: err.response?.data?.message || "An error occurred",
