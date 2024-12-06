@@ -22,11 +22,15 @@ ChartJS.register(
 
 const SmsStats = ({ stats }) => {
   const data = {
-    labels: ["Last Minute", "Today"],
+    labels: ["Last Minute", "Today", "Yesterday"],
     datasets: [
       {
         label: "SMS Requests",
-        data: [stats.requestsLastMinute, stats.requestsLastDay],
+        data: [
+          stats.requestsLastMinute,
+          stats.requestsToday,
+          stats.requestsLastDay,
+        ],
         backgroundColor: "#2563EB",
         borderColor: "#2563EB",
         borderWidth: 1,
